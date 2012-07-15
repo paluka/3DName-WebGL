@@ -1,0 +1,66 @@
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <html>
+  <head>
+      <title>Erik Paluka</title>
+      <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+      <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="webgl-utils.js"></script>
+    <script type="text/javascript" src="paluka.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec2 vTextureCoord;
+
+        uniform sampler2D uSampler;
+
+        void main(void) {
+        gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        }
+    </script>
+
+    <script id="shader-vs" type="x-shader/x-vertex">
+        attribute vec3 aVertexPosition;
+        attribute vec2 aTextureCoord;
+
+        uniform mat4 uMVMatrix;
+        uniform mat4 uPMatrix;
+
+        varying vec2 vTextureCoord;
+
+
+        void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+        }
+    </script>
+  </head>
+  <body onload="webGLStart();"><div class="container">
+  
+      
+          <div>
+        <div style="width:900px; margin-top:40px;">
+    <div id="content">
+        <div id="webGL" style="text-align: center">
+            <div>
+                <h3>WebGL Example using JavaScript</h3>
+<br />
+                <span>Use the "Z" and "X" keys to control zooming. Use the arrows keys to move about the X and Y axes.</span><br />
+               <span>I learned how to use WebGL at <a href="http://learningwebgl.com/blog/?page_id=1217" target="_blank">Learning WebGL</a>. I am using glMatrix-0.9.5.min.js and webgl-utils.js.</span>
+            </div>
+            <br />
+            <canvas id="canvas1" style="border: dotted;" width="900px" height="400"></canvas>
+
+        </div>
+
+    </div>
+    
+             
+    </div>
+    </div></div>
+          
+      
+      </body>
+  </html>

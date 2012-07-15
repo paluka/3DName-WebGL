@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Erik Paluka</title>
+
+    <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="webgl-utils.js"></script>
+    <script type="text/javascript" src="terrain.js"></script>
+
+    <script id="shader-fs" type="x-shader/x-fragment">
+        precision mediump float;
+
+        varying vec4 vColor;
+        varying vec3 vLightWeighting;
+
+        void main(void) {
+        gl_FragColor = vec4(vColor.rgb* vLightWeighting, vColor.a);
+        }
+    </script>
+
+    <script id="shader-vs" type="x-shader/x-vertex">
+        attribute vec3 aVertexPosition;
+        attribute vec4 aVertexColor;
+        attribute vec3 aVertexNormal;
+
+        uniform mat4 uMVMatrix;
+        uniform mat4 uPMatrix;
+        uniform mat3 uNMatrix;
+
+        uniform vec3 uAmbientColor;
+        uniform vec3 uLightingDirection;
+        uniform vec3 uDirectionalColor;
+
+        varying vec4 vColor;
+        varying vec3 vLightWeighting;
+
+        void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vColor = aVertexColor;
+
+
+
+
+        vec3 transformedNormal = uNMatrix * aVertexNormal;
+        float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
+        vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
+
+        }
+    </script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+<canvas id="canvas1" style="border: none; width: 100%; height: 100%" ></canvas>
+<br/>
+<h2>Directional light:</h2>
+
+<table style="border: 0; padding: 10px;">
+    <tr>
+        <td><b>Direction:</b>
+        <td>X: <input type="text" id="lightDirectionX" value="-0.25" />
+        <td>Y: <input type="text" id="lightDirectionY" value="-0.25" />
+        <td>Z: <input type="text" id="lightDirectionZ" value="-1.0" />
+    </tr>
+    <tr>
+        <td><b>Colour:</b>
+        <td>R: <input type="text" id="directionalR" value="0.8" />
+        <td>G: <input type="text" id="directionalG" value="0.8" />
+        <td>B: <input type="text" id="directionalB" value="0.8" />
+    </tr>
+</table>
+
+<h2>Ambient light:</h2>
+<table style="border: 0; padding: 10px;">
+    <tr>
+        <td><b>Colour:</b>
+        <td>R: <input type="text" id="ambientR" value="0.2" />
+        <td>G: <input type="text" id="ambientG" value="0.2" />
+        <td>B: <input type="text" id="ambientB" value="0.2" />
+    </tr>
+</table>
+</body>
+
+</html>
