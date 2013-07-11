@@ -1,12 +1,7 @@
 Erik Paluka. 2012.
 
-WebGL projects
+WebGL 3D Box Letters that form the name "Erik". 
 
+The camera can be manipulated using the "Z" and "X" keys to control zooming. Use the arrows keys to move about the X and Y axes.
 
-"WebGL-3D_Box_Letters"
--WebGL 3D Box Letters that form the name "Erik"
-
-
-
-"Midpoint_Displacement_Algorithm"
--Midpoint displacement algorithm (http://www.cescg.org/CESCG97/marak/node3.html)
+I am using glMatrix-0.9.5.min.js and webgl-utils.js.
