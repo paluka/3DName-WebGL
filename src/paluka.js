@@ -1045,28 +1045,28 @@
         }
 
     function handleKeys() {
-        if (currentlyPressedKeys[37]) {
-        // Left Arrow
+        if (currentlyPressedKeys[83]) {
+        // S
         x += 0.1;
         }
-    if (currentlyPressedKeys[39]) {
-        // Right Arrow
+    if (currentlyPressedKeys[88]) {
+        // X
         x -= 0.1;
         }
-    if (currentlyPressedKeys[38]) {
-        // Up Arrow
+    if (currentlyPressedKeys[67]) {
+        // C
         y -= 0.1;
         }
-    if (currentlyPressedKeys[40]) {
-        // Down Arrow
+    if (currentlyPressedKeys[68]) {
+        // D
         y += 0.1;
         }
     if (currentlyPressedKeys[90]) {
         // Z key
         z -= 0.1;
         }
-    if (currentlyPressedKeys[88]) {
-        // X key
+    if (currentlyPressedKeys[65]) {
+        // A key
         z += 0.1;
         }
     }
