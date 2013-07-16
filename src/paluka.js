@@ -1,26 +1,25 @@
+var gl;
 
-
-    var gl;
-
-    function initGL(canvas) {
-        try {
-        gl = canvas.getContext("experimental-webgl");
-        gl.viewportWidth = canvas.width;
-        gl.viewportHeight = canvas.height;
-        } catch (e) {
-        alert("WebGL is not supported by your browser. Switch to Google Chrome or Mozilla Firefox to see my WebGL experiment.");
-        }
-	if(!gl){
-		gl = setupWebGL(canvas);
-	}
-
+function initGL(canvas) {
+    try {
+    gl = canvas.getContext("experimental-webgl");
+    gl.viewportWidth = canvas.width;
+    gl.viewportHeight = canvas.height;
+    } catch (e) {
+    
     }
 
+    if(!gl){
+        alert("Sorry, but your browser does not support WebGL or does not have it enabled. To get a WebGL-enabled browser, please see: http://get.webgl.org/");
+    }
 
-    function getShader(gl, id) {
+}
+
+
+function getShader(gl, id) {
         var shaderScript = document.getElementById(id);
         if (!shaderScript) {
-        return null;
+            return null;
         }
 
     var str = "";
@@ -1082,14 +1081,16 @@
     function webGLStart() {
         var canvas = document.getElementById("canvas1");
         initGL(canvas);
-        initShaders();
-        initBuffers();
-        initTexture();
+        if(gl){
+            initShaders();
+            initBuffers();
+            initTexture();
 
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
-        gl.enable(gl.DEPTH_TEST);
-        document.onkeydown = handleKeyDown;
-        document.onkeyup = handleKeyUp;
+            gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            gl.enable(gl.DEPTH_TEST);
+            document.onkeydown = handleKeyDown;
+            document.onkeyup = handleKeyUp;
 
-        tick();
+            tick();
         }
+     }
